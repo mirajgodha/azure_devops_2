@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.21">
+    <title>Quantum Root AI - Ask Something</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@40;60&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A235A; /* Dark purple from logo */
+            --secondary-color: #6A1B9A; /* A slightly lighter purple */
+            --accent-color: #FFD700; /* Gold/Yellow for highlights */
+            --light-bg: #F8F8F8;
+            --dark-text: #333;
+            --light-text: #FFFFFF;
+            --border-radius: 8px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+      .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            flex-grow: 1;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        header.logo { /* Targeting the logo specifically within the header */
+            max-width: 180px; /* Adjusted size: smaller */
+            height: auto;
+            margin-bottom: 15px;
+            display: block; /* Ensures it behaves as a block element for margin auto */
+            margin-left: auto; /* Centers the logo */
+            margin-right: auto; /* Centers the logo */
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5em;
+            margin: 0;
+            padding: 0 20px;
+        }
+
+      .section {
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+      .top-section {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            text-align: center;
+        }
+
+      .top-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+      .top-section p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+      .top-section.details {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+      .qr-code-placeholder {
+            background-color: var(--light-text);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            display: inline-block;
+            margin-top: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+      .qr-code-placeholder img {
+            width: 150px; /* QR code size */
+            height: 150px; /* QR code size */
+            display: block;
+        }
+
+      .bottom-section {
+            background-color: var(--light-text);
+            color: var(--dark-text);
+        }
+
+      .bottom-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+      .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+      .skills-list li {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+
+      .skills-list li::before {
+            content: '✅'; /* Checkmark icon */
+            font-size: 1.2em;
+        }
+
+      .warning-box {
+            background-color: #FFF3CD; /* Light yellow */
+            color: #856404; /* Dark yellow text */
+            border: 1px solid #FFEBA2;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+      .warning-box span {
+            color: #DC3545; /* Red exclamation */
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+
+      .features-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+      .features-list li {
+            background-color: #E0F7FA; /* Light blue */
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            color: var(--dark-text);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+      .features-list li::before {
+            content: '💡'; /* Lightbulb icon */
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+      .features-list li:nth-child(2)::before { content: '👥'; }
+      .features-list li:nth-child(3)::before { content: '🧑‍💻'; }
+      .features-list li:nth-child(4)::before { content: '🧠'; }
+      .features-list li:nth-child(5)::before { content: '📚'; }
+
+      .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.1em;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+      .contact-info p {
+            margin: 5px 0;
+        }
+
+      .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+      .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Chatbot Section */
+      .chatbot-section {
+            background-color: var(--light-text);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+      .chatbot-section h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+      .chatbot-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+      .chatbot-section input[type="text"] {
+            width: 80%;
+            padding: 12px 15px;
+            border: 1px solid #CCC;
+            border-radius: var(--border-radius);
+            font-size: 1em;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s ease;
+        }
+
+      .chatbot-section input[type="text"]:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+      .chatbot-section button {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 12px 25px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+      .chatbot-section button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+      .response-area {
+            margin-top: 25px;
+            background-color: #E8F5E9; /* Light green for response */
+            border: 1px solid #C8E6C9;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: left;
+        }
+
+      .response-area h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+      .response-area p {
+            margin-bottom: 0;
+            font-size: 1.05em;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+          .section {
+                padding: 20px;
+            }
+
+          .top-section h2 {
+                font-size: 1.5em;
+            }
+
+          .bottom-section h2 {
+                font-size: 1.4em;
+            }
+
+          .skills-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+          .chatbot-section input[type="text"] {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header style="padding: 0.5rem 2rem; position: relative; display: flex; align-items: center;">
+        <img src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800" alt="Quantum Root Logo" class="logo" style="height: 50px; width: auto;">
+        <h1 style="font-size: 1.5rem; margin: 0 auto;">Quantum Root AI - Ask Something</h1>
+    </header>
+
+    <div class="container">
+        <div class="section top-section">
+            <h2>Free GenAI Session</h2>
+            <h3>🧠 Generative AI Made Simple: For Everyone in Business</h3>
+            <p>Join our FREE 2.5-hour weekend session</p>
+            <div class="details">
+                📅 Weekend | 🕒 2.5 Hours | 💻 Live Online
+                <br>No tech background needed
+            </div>
+            <div class="qr-code-placeholder">
+                <img src="https://media.canva.com/v2/image-resize/format:PNG/height:550/quality:100/uri:ifs%3A%2F%2FM%2Fb4945bab-0b94-4b5c-833a-1839de8b86a1/watermark:F/width:550?csig=AAAAAAAAAAAAAAAAAAAAANsKWyv60El_Edvo7neJ4zUe1IFh-Yrkph_Dgv6YJ7VH&exp=1754145095&osig=AAAAAAAAAAAAAAAAAAAAAC5dPYSfXAWZ4I6nMgiWKyOoSsDkhsgJWuGB6ptTQ_O9&signer=media-rpc&x-canva-quality=thumbnail_large" alt="QR Code to Get the offer">
+                <p style="color: var(--dark-text); font-weight: 700; margin-top: 10px;">Scan QR Code to Register Now</p>
+            </div>
+        </div>
+
+        <div class="section bottom-section">
+            <h2>🚀 Future-Proof Your Career with Quantum Root</h2>
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 25px;">Master job-ready skills in:</p>
+            <ul class="skills-list">
+                <li>Data Engineering</li>
+                <li>NoSQL Databases</li>
+                <li>Machine Learning</li>
+                <li>Generative AI</li>
+            </ul>
+
+            <div class="warning-box">
+                <span>⚠️</span> Fear of layoffs? Learn in-demand tech now.
+                <br><span>⚡</span> Learn GenAI before GenAI takes your job.
+            </div>
+
+            <ul class="features-list">
+                <li>🎓 Get Certified</li>
+                <li>👥 Group Discount for 3+</li>
+                <li>🧑‍💻 Real-world Projects</li>
+                <li>🧠 Industry Experts</li>
+                <li>📚 Online & Offline Classes Available</li>
+            </ul>
+
+            <div class="contact-info">
+                <p>📍 Quantum Root, Opp. Magarpatta Main Gate, Pune</p>
+                <p>🌐 <a href="https://quantumroot.in" target="_blank">quantumroot.in</a></p>
+                <p>📞 +91 96502 19962 | +91 98188 23045</p>
+            </div>
+        </div>
+
+        <div class="chatbot-section">
+            <h2>Ask Quantum Root AI a Question</h2>
+            <form id="chatForm" onsubmit="return false;">
+                <input type="text" name="question" id="questionInput" placeholder="e.g., What is Generative AI?" required>
+                <div class="button-group" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button type="button" onclick="submitForm('api1')" class="ask-button">Ask</button>
+                    <button type="button" id="qrButton" onclick="submitForm('api2')" class="ask-button" style="display: none; background-color: #4A235A;">Ask Quantum Root</button>
+                </div>
+            </form>
+            <div id="responseArea" class="response-area" style="margin-top: 20px; min-height: 50px;">
+                {% if answer %}
+                    <h3>Response:</h3>
+                    <p>{{ answer }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Quantum Root. All rights reserved.</p>
+    </footer>
+    <script>
+        function submitForm(apiType) {
+            const question = document.getElementById('questionInput').value.trim();
+            if (!question) return;
+
+            const responseArea = document.getElementById('responseArea');
+            if (!responseArea) {
+                console.error('Response area not found');
+                return;
+            }
+            
+            // Show loading state
+            responseArea.innerHTML = '<p>Thinking...</p>';
+            
+            fetch(`/${apiType}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `question=${encodeURIComponent(question)}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    responseArea.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+                } else {
+                    responseArea.innerHTML = `
+                        <h3>Response:</h3>
+                        <p>${(data.answer || '').replace(/\n/g, '<br>')}</p>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                responseArea.innerHTML = '<p style="color: red;">An error occurred. Please try again.</p>';
+            });
+        }
+
+        // Show the Quantum Root button after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const qrButton = document.getElementById('qrButton');
+            if (qrButton) {
+                setTimeout(() => {
+                    qrButton.style.display = 'inline-block';
+                }, 5000);
+            } else {
+                console.warn('Quantum Root button not found');
+            }
+        });
+    </script>
+</body>
+</html>
