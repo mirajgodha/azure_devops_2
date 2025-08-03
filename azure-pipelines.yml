@@ -11,13 +11,13 @@ variables:
   azureServiceConnectionId: '0fc6e857-647c-4935-b3a5-88f5a61b848f'
 
   # Web app name
-  webAppName: 'hexaware-ai'
+  webAppName: 'abcdxyz'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
   # Environment name
-  environmentName: 'hexaware-ai'
+  environmentName: 'abcdxyz'
 
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
@@ -79,7 +79,7 @@ stages:
             displayName: 'Use Python version'
 
           - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App : hexaware-ai'
+            displayName: 'Deploy Azure Web App : abcdxyz'
             inputs:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(webAppName)
