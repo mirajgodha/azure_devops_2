@@ -6,3 +6,7 @@ chromadb
 sentence-transformers
 beautifulsoup4
 requests
+lxml
+playwright
+langchain-community
+unstructured
