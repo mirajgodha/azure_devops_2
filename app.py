@@ -123,33 +123,6 @@ Blog can be found at https://quantumroot.in/blog
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/api3", methods=["GET", "POST"])
-def api3():
-    answer = ""
-    if request.method == "POST":
-        q = request.form.get("question", "").strip()
-
-        if not q:
-            return render_template("index.html", answer="Ask something!")
-
-        # Retrieve relevant documents
-        vectordb = Chroma(persist_directory=DB_DIR, embedding_function=HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-small"))
-        retriever = vectordb.as_retriever(search_kwargs={"k": 3})
-        results = retriever.get_relevant_documents(q)
-
-        context = "\n\n".join([doc.page_content for doc in results])
-
-        messages = [
-            {"role": "system", "content": f"Use the following context to answer:\n\n{context}"},
-            {"role": "user", "content": q}
-        ]
-
-        client = AzureOpenAI(api_key=api_key, azure_endpoint=api_url, api_version=api_version)
-        resp = client.chat.completions.create(model=deployment_name, messages=messages)
-        answer = resp.choices[0].message.content
-
-    return render_template("index.html", answer=answer)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
