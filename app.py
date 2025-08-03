@@ -1,10 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 import os
 from dotenv import load_dotenv
-from langchain.embeddings import HuggingFaceInstructEmbeddings
-from langchain.vectorstores import Chroma
-from langchain.embeddings.openai import OpenAIEmbeddings
-from openai import AzureOpenAI
 import openai
 import logging
 
