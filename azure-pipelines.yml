@@ -11,7 +11,7 @@ variables:
   azureServiceConnectionId: '0fc6e857-647c-4935-b3a5-88f5a61b848f'
 
   # Web app name
-  webAppName: 'abcdxyz'
+  webAppName: 'hexaware-ai'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
